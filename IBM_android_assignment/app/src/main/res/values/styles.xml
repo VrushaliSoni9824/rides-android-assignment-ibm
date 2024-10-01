@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text Appearance Subtitle1 style -->
+    <style name="TextAppearance.Theme1.Subtitle1"
+        parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- TextView style -->
+    <style name="Widget.Theme1.TextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">?attr/textAppearanceSubtitle1</item>
+    </style>
+
+    <!-- Final price TextView style -->
+    <style name="Widget.Theme1.TextView.FinalPrice" parent="Widget.Theme1.TextView">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+    </style>
+
+    <!-- TextView style for an order summary label -->
+    <style name="Widget.Theme1.TextView.Label" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+    </style>
+
+    <!-- Divider style -->
+    <style name="Widget.Theme1.Divider" parent="">
+        <item name="android:background">?attr/dividerHorizontal</item>
+    </style>
+</resources>
