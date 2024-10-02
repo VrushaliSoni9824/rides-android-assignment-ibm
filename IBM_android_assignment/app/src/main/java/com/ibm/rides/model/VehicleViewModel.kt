@@ -19,12 +19,12 @@ class VehicleViewModel : ViewModel() {
     val apiError: LiveData<String?> = _apiError
 
     init {
-        fetchVehiclesFromApi()
+        fetchVehiclesFromApi(2)
     }
-    private fun fetchVehiclesFromApi() {
+    fun fetchVehiclesFromApi(size: Int) {
         viewModelScope.launch {
             try {
-                val response = ApiClient.vehicleApiService.getVehicles()
+                val response = ApiClient.vehicleApiService.getVehicles(size)
                 if (response.isSuccessful && response.body() != null) {
                     _vehicleList.value = response.body()!!
                 } else {

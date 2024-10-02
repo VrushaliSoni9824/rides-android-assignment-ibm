@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,8 +22,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ibm.rides.R
-import com.ibm.rides.Vehicle
 import com.ibm.rides.VehicleViewModel
+import com.ibm.rides.model.Vehicle
 
 enum class SortOption { VIN, CAR_TYPE }
 
@@ -53,11 +54,17 @@ class FirstFragment : Fragment() {
         var sortOption by remember { mutableStateOf(SortOption.VIN) }
 
         val vehicleList by sharedViewModel.vehicleList.observeAsState(emptyList())
+        val apiError by sharedViewModel.apiError.observeAsState()
 
         // Sort vehicle list based on selected option
         val sortedVehicleList = when (sortOption) {
             SortOption.VIN -> vehicleList.sortedBy { it.vin }
             SortOption.CAR_TYPE -> vehicleList.sortedBy { it.car_type }
+        }
+        apiError?.let {
+            LaunchedEffect(it) {
+                sharedViewModel.clearError()  // Clear error after displaying it
+            }
         }
 
         LazyColumn(
@@ -81,7 +88,10 @@ class FirstFragment : Fragment() {
 
             item {
                 Button(
-                    onClick = { actionRedirect() },
+                    onClick = {
+                        val size = textInput.toIntOrNull() ?: 2  // Default to 2 if input is invalid
+                        sharedViewModel.fetchVehiclesFromApi(size)  // Pass size to the ViewModel
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(stringResource(id = R.string.Search))
