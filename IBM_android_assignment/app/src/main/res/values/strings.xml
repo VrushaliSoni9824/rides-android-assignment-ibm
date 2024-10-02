@@ -14,4 +14,13 @@
         <item quantity="one">%d Vehicle</item>
         <item quantity="other">%d Vehicles</item>
     </plurals>
+    <string name="enter_number_of_items">Enter number of items</string>
+    <string name="Search">Search</string>
+    <string name="sort_by_vin">Sort by VIN</string>
+    <string name="sort_by_car_type">Sort by Car Type</string>
+    <string name="make_and_model">Make and Model:</string>
+    <string name="vin">Vin:</string>
+    <string name="car_type">Car Type:</string>
+
+
 </resources>

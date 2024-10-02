@@ -80,6 +80,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")        // Retrofit for API calls
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")  // Gson converter for JSON serialization
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
     // Testing Libraries
     testImplementation(libs.junit)                                   // JUnit for unit tests
@@ -92,4 +93,7 @@ dependencies {
 
     // Optional: Coil (Image Loading Library) if you're dealing with images
     implementation("io.coil-kt:coil-compose:2.1.0")                  // Coil for image loading in Jetpack Compose
+    implementation(libs.androidx.ui.android)
+    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation(libs.androidx.runtime.livedata)
 }
