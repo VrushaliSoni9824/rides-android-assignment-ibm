@@ -1,9 +1,12 @@
 package com.ibm.rides.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.lightColorScheme
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -12,7 +15,6 @@ import com.ibm.rides.VehicleViewModel
 import com.ibm.rides.databinding.FragmentSecondBinding
 
 class SecondFragment : Fragment() {
-
 
     private var binding: FragmentSecondBinding? = null
 
@@ -40,11 +42,22 @@ class SecondFragment : Fragment() {
             // Assign the fragment
             endFragment = this@SecondFragment
         }
-        binding!!.cancelButton.setOnClickListener {
 
+        // Observe the selected vehicle and update UI elements
+        sharedViewModel.selectedVehicle.observe(viewLifecycleOwner) { vehicle ->
+            Log.e("######567",vehicle.toString())
+            vehicle?.let {
+                binding?.vinTextView?.text = it.vin
+                binding?.makeModelTextView?.text = it.make_and_model
+                binding?.colorTextView?.text = it.color
+                binding?.carTypeTextView?.text = it.car_type
+            }
         }
-    }
 
+//        binding!!.cancelButton.setOnClickListener {
+//            // Handle cancel button click (optional)
+//        }
+    }
 
     fun goHome() {
         // Reset order in view model
