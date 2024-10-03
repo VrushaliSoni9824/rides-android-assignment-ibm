@@ -75,6 +75,11 @@ class VehicleViewModel(private val vehicleRepository: VehicleRepository) : ViewM
     fun clearError() {
         _apiError.value = null
     }
+
+    fun getCarbonEmissionsForSelectedVehicle(): Double? {
+        return _selectedVehicle.value?.calculateCarbonEmissions()
+    }
+
     companion object {
         private const val TAG = "VehicleViewModel"
         private const val DEFAULT_VEHICLE_COUNT = 2

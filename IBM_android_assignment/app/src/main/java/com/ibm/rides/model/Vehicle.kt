@@ -1,4 +1,5 @@
 package com.ibm.rides.model
+
 import com.google.gson.annotations.SerializedName
 
 data class Vehicle(
@@ -15,4 +16,11 @@ data class Vehicle(
     val mileage: Int,
     val kilometrage: Int,
     val license_plate: String
-)
+) {
+    fun calculateCarbonEmissions(): Double {
+        return when {
+            kilometrage <= 5000 -> kilometrage * 1.0 // 1 unit of carbon per km for the first 5000 km
+            else -> (5000 * 1.0) + ((kilometrage - 5000) * 1.5) // 1 unit for first 5000 km, 1.5 for remaining km
+        }
+    }
+}
