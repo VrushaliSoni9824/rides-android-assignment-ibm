@@ -2,7 +2,6 @@ package com.ibm.rides.fragments
 
 //import VehicleViewModel
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
@@ -101,7 +99,8 @@ class FirstFragment : Fragment() {
                     },
                     onSearchClick = {
                         val size = textInput.toIntOrNull()
-                        if (size != null && size in 1..100) {
+                        if (sharedViewModel.isInputValid(size)) {
+                            val size = textInput.toInt()
                             sharedViewModel.fetchVehiclesFromApi(size)
                         } else {
                             errorMessage = "Please enter a number between 1 and 100."

@@ -1,6 +1,5 @@
 package com.ibm.rides
 
-import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -78,6 +77,12 @@ class VehicleViewModel(private val vehicleRepository: VehicleRepository) : ViewM
 
     fun getCarbonEmissionsForSelectedVehicle(): Double? {
         return _selectedVehicle.value?.calculateCarbonEmissions()
+    }
+
+    // In VehicleViewModel
+    fun isInputValid(input: Int?): Boolean {
+        val size = input
+        return size != null && size in 1..100
     }
 
     companion object {
