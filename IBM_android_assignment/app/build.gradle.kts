@@ -107,5 +107,7 @@ dependencies {
 //    testImplementation("androidx.arch.core:core-testing:2.1.0")  // For LiveData testing
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4") // For coroutines testing
 
+    testImplementation("org.mockito:mockito-core:4.5.1") // For mocking
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
 
 }
