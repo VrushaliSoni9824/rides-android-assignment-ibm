@@ -25,5 +25,7 @@
     <string name="make_model_label">Make and Model:</string>
     <string name="color_label">Color:</string>
     <string name="car_type_label">Car Type:</string>
-
+    <string name="error_message_size_range">Please enter a number between 1 and 100.</string>
+    <string name="carbon_emission">Carbon emission</string>
+    <string name="kilometrage">kilometrage</string>
 </resources>

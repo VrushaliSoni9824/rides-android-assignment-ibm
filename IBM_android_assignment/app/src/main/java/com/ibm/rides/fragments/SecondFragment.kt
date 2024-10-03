@@ -12,7 +12,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ibm.rides.R
 import com.ibm.rides.VehicleViewModel
+import com.ibm.rides.adapters.ViewPagerAdapter
 import com.ibm.rides.databinding.FragmentSecondBinding
+import com.ibm.rides.model.Vehicle
 
 class SecondFragment : Fragment() {
 
@@ -33,30 +35,14 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.apply {
-            // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
-
-            // Assign the view model to a property in the binding class
             viewModel = sharedViewModel
-
-            // Assign the fragment
             endFragment = this@SecondFragment
-        }
 
-        // Observe the selected vehicle and update UI elements
-        sharedViewModel.selectedVehicle.observe(viewLifecycleOwner) { vehicle ->
-            Log.e("######567",vehicle.toString())
-            vehicle?.let {
-                binding?.vinTextView?.text = it.vin
-                binding?.makeModelTextView?.text = it.make_and_model
-                binding?.colorTextView?.text = it.color
-                binding?.carTypeTextView?.text = it.car_type
-            }
+            // Setup ViewPager2
+            val viewPagerAdapter = ViewPagerAdapter(requireActivity())
+            viewPager.adapter = viewPagerAdapter
         }
-
-//        binding!!.cancelButton.setOnClickListener {
-//            // Handle cancel button click (optional)
-//        }
     }
 
     fun goHome() {

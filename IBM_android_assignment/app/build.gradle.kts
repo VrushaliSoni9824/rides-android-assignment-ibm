@@ -100,4 +100,6 @@ dependencies {
     implementation(libs.androidx.ui.android)
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation(libs.androidx.runtime.livedata)
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
+
 }

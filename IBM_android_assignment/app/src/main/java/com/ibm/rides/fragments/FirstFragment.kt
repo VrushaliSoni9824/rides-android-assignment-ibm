@@ -60,13 +60,7 @@ class FirstFragment : Fragment() {
         }
 
     }
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        val vehicleRepository = VehicleRepository()
-//        vehicleViewModel = ViewModelProvider(this, VehicleViewModelFactory(vehicleRepository)).get(VehicleViewModel::class.java)
-//
-//
-//    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<ComposeView>(R.id.compose_view).setContent {
@@ -84,6 +78,7 @@ class FirstFragment : Fragment() {
     fun FirstScreen() {
         var textInput by remember { mutableStateOf("") }
         var sortOption by remember { mutableStateOf(SortOption.VIN) }
+        var errorMessage by remember { mutableStateOf<String?>(null) } // State for error message
 
         // Observe the Vehicle UI State
         val vehicleUIState by sharedViewModel.uiState.observeAsState(VehicleUIState.Loading)
@@ -95,10 +90,17 @@ class FirstFragment : Fragment() {
                 val vehicleList = (vehicleUIState as VehicleUIState.Success).vehicles
                 VehicleListUI(
                     textInput = textInput,
-                    onTextInputChange = { textInput = it },
+                    onTextInputChange = {
+                        textInput = it
+                        errorMessage = null
+                    },
                     onSearchClick = {
-                        val size = textInput.toIntOrNull() ?: DEFAULT_SIZE
-                        sharedViewModel.fetchVehiclesFromApi(size)
+                        val size = textInput.toIntOrNull()
+                        if (size != null && size in 1..100) {
+                            sharedViewModel.fetchVehiclesFromApi(size)
+                        } else {
+                            errorMessage = "Please enter a number between 1 and 100."
+                        }
                     },
                     sortOption = sortOption,
                     onSortChange = { sortOption = it },
@@ -111,7 +113,8 @@ class FirstFragment : Fragment() {
                     onVehicleClick = { vehicle ->
                         sharedViewModel.selectVehicle(vehicle)
                         actionRedirect()
-                    }
+                    },
+                    errorMessage = errorMessage
                 )
             }
             is VehicleUIState.Error -> {
@@ -133,7 +136,8 @@ class FirstFragment : Fragment() {
         sortOption: SortOption,
         onSortChange: (SortOption) -> Unit,
         vehicleList: List<Vehicle>,
-        onVehicleClick: (Vehicle) -> Unit
+        onVehicleClick: (Vehicle) -> Unit,
+        errorMessage: String? 
     ) {
         LazyColumn(
             modifier = Modifier
@@ -143,6 +147,12 @@ class FirstFragment : Fragment() {
         ) {
             item {
                 SearchInputField(textInput, onTextInputChange)
+            }
+
+            item {
+                errorMessage?.let {
+                    Text(text = it, color = Color.Red)
+                }
             }
 
             item {
