@@ -28,6 +28,9 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://random-data-api.com/\"")
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -40,6 +43,7 @@ android {
         compose = true
         viewBinding = true
         dataBinding = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"

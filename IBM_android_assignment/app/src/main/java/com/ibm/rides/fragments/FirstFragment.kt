@@ -1,6 +1,8 @@
 package com.ibm.rides.fragments
 
+//import VehicleViewModel
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,16 +25,23 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ibm.rides.R
 import com.ibm.rides.VehicleViewModel
+//import com.ibm.rides.VehicleViewModel
 import com.ibm.rides.model.Vehicle
+import com.ibm.rides.repository.VehicleRepository
+import com.ibm.rides.sealedClass.VehicleUIState
 
 enum class SortOption { VIN, CAR_TYPE }
 
 class FirstFragment : Fragment() {
 
-    private val sharedViewModel: VehicleViewModel by activityViewModels()
+    private val sharedViewModel: VehicleViewModel by activityViewModels {
+        VehicleViewModelFactory(VehicleRepository())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +50,23 @@ class FirstFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
+    class VehicleViewModelFactory(private val repository: VehicleRepository) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(VehicleViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return VehicleViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
+
+    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        val vehicleRepository = VehicleRepository()
+//        vehicleViewModel = ViewModelProvider(this, VehicleViewModelFactory(vehicleRepository)).get(VehicleViewModel::class.java)
+//
+//
+//    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<ComposeView>(R.id.compose_view).setContent {
@@ -59,24 +85,14 @@ class FirstFragment : Fragment() {
         var textInput by remember { mutableStateOf("") }
         var sortOption by remember { mutableStateOf(SortOption.VIN) }
 
-        val vehicleList by sharedViewModel.vehicleList.observeAsState(emptyList())
-        val apiError by sharedViewModel.apiError.observeAsState()
-        val isLoading by sharedViewModel.isLoading.observeAsState(false)
+        // Observe the Vehicle UI State
+        val vehicleUIState by sharedViewModel.uiState.observeAsState(VehicleUIState.Loading)
 
-        val sortedVehicleList = remember(sortOption, vehicleList) {
-            when (sortOption) {
-                SortOption.VIN -> vehicleList.sortedBy { it.vin }
-                SortOption.CAR_TYPE -> vehicleList.sortedBy { it.car_type }
-            }
-        }
-
-        // Display API Error if exists
-        apiError?.let { sharedViewModel.clearError() }
-
-        Surface(modifier = Modifier.fillMaxSize()) {
-            if (isLoading) {
-                LoadingIndicator()
-            } else {
+        // Handle UI states
+        when (vehicleUIState) {
+            is VehicleUIState.Loading -> LoadingIndicator()
+            is VehicleUIState.Success -> {
+                val vehicleList = (vehicleUIState as VehicleUIState.Success).vehicles
                 VehicleListUI(
                     textInput = textInput,
                     onTextInputChange = { textInput = it },
@@ -86,12 +102,25 @@ class FirstFragment : Fragment() {
                     },
                     sortOption = sortOption,
                     onSortChange = { sortOption = it },
-                    vehicleList = sortedVehicleList,
+                    vehicleList = vehicleList.sortedBy {
+                        when (sortOption) {
+                            SortOption.VIN -> it.vin
+                            SortOption.CAR_TYPE -> it.car_type
+                        }
+                    },
                     onVehicleClick = { vehicle ->
                         sharedViewModel.selectVehicle(vehicle)
                         actionRedirect()
                     }
                 )
+            }
+            is VehicleUIState.Error -> {
+                val errorMessage = (vehicleUIState as VehicleUIState.Error).message
+                ErrorUI(errorMessage) {
+                    // Retry logic: fetch vehicles again
+                    val size = textInput.toIntOrNull() ?: DEFAULT_SIZE
+                    sharedViewModel.fetchVehiclesFromApi(size)
+                }
             }
         }
     }
@@ -129,6 +158,22 @@ class FirstFragment : Fragment() {
 
             items(vehicleList) { vehicle ->
                 VehicleItem(vehicle = vehicle, onClick = { onVehicleClick(vehicle) })
+            }
+        }
+    }
+
+    @Composable
+    fun ErrorUI(message: String, onRetry: () -> Unit) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = "Error: $message", color = Color.Red)
+                Spacer(modifier = Modifier.height(8.dp))
+                Button(onClick = onRetry) {
+                    Text(text = "Retry")
+                }
             }
         }
     }
