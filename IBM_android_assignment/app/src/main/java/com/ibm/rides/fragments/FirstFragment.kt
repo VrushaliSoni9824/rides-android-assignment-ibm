@@ -34,6 +34,7 @@ import com.ibm.rides.VehicleViewModel
 import com.ibm.rides.model.Vehicle
 import com.ibm.rides.repository.VehicleRepository
 import com.ibm.rides.sealedClass.VehicleUIState
+import com.ibm.rides.ui.theme.RidesTheme
 
 enum class SortOption { VIN, CAR_TYPE }
 
@@ -58,15 +59,19 @@ class FirstFragment : Fragment() {
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<ComposeView>(R.id.compose_view).setContent {
-            MaterialTheme(
-                colorScheme = lightColorScheme(), // Set light color scheme
-            ) {
+//            MaterialTheme(
+//                colorScheme = lightColorScheme(), // Set light color scheme
+//            ) {
+//                Surface(color = MaterialTheme.colorScheme.background) {
+//                    FirstScreen()
+//                }
+//            }
+            RidesTheme {  // Use your custom RidesTheme here
                 Surface(color = MaterialTheme.colorScheme.background) {
                     FirstScreen()
                 }
@@ -206,9 +211,9 @@ class FirstFragment : Fragment() {
     fun SearchButton(onClick: () -> Unit) {
         Button(
             onClick = onClick,
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(ContextCompat.getColor(requireContext(), R.color.dark_grey))
-            ),
+//            colors = ButtonDefaults.buttonColors(
+//                containerColor = Color(ContextCompat.getColor(requireContext(), R.color.dark_grey))
+//            ),
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(stringResource(id = R.string.Search))
@@ -240,14 +245,15 @@ class FirstFragment : Fragment() {
             onClick = onClick,
             colors = ButtonDefaults.buttonColors(
                 containerColor = if (selected)
-                    Color(ContextCompat.getColor(requireContext(), R.color.dark_grey))
-                else Color.White,
+                    MaterialTheme.colorScheme.primary // Use the primary color from the theme when selected
+                else MaterialTheme.colorScheme.surface, // Use the surface color from the theme when not selected
                 contentColor = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
             )
         ) {
             Text(label)
         }
     }
+
 
     @Composable
     fun VehicleItem(vehicle: Vehicle, onClick: () -> Unit) {

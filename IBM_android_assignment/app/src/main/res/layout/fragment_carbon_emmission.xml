@@ -18,6 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:theme="@style/RidesTheme"
             android:padding="@dimen/side_margin">
 
             <TextView
@@ -25,10 +26,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/carbon_emission"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/dark_grey"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="20dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -37,69 +38,66 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 app:layout_constraintTop_toBottomOf="@id/section_header"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="#E7DFEC"
-                app:cardCornerRadius="8dp">
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/purple_grey_80"
+                app:cardCornerRadius="12dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="8dp">
+                            android:text="@string/kilometrage"
+                            android:textStyle="bold"
+                            android:textColor="@color/dark_grey"
+                            android:layout_marginEnd="12dp"
+                            android:textSize="18sp"/>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/kilometrage"
-                                android:textStyle="bold"
-                                android:textColor="@color/dark_grey"
-                                android:layout_marginEnd="8dp"/>
-
-                            <TextView
-                                android:id="@+id/co2_emissions_text_view"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/dark_grey"
-                                android:drawablePadding="8dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/kilometrage_text_view"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="8dp">
+                            android:text="@{String.valueOf(viewModel.selectedVehicle.kilometrage)}"
+                            android:textColor="@color/dark_grey"
+                            android:drawablePadding="8dp" />
+                    </LinearLayout>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/carbon_emission"
-                                android:textStyle="bold"
-                                android:textColor="@color/dark_grey"
-                                android:layout_marginEnd="8dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp">
 
-                            <TextView
-                                android:id="@+id/carbon_emissions_text_view"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/dark_grey"
-                                android:drawablePadding="8dp" />
-                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/carbon_emission"
+                            android:textStyle="bold"
+                            android:textColor="@color/dark_grey"
+                            android:layout_marginEnd="12dp"
+                            android:textSize="18sp"/>
 
+                        <TextView
+                            android:id="@+id/carbon_emissions_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/dark_grey"
+                            android:text="@{String.valueOf(viewModel.selectedVehicle.calculateCarbonEmissions())}"
+                            android:drawablePadding="8dp" />
                     </LinearLayout>
 
                 </LinearLayout>

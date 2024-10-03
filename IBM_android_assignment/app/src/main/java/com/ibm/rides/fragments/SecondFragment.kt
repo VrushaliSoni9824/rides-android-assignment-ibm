@@ -43,10 +43,10 @@ class SecondFragment : Fragment() {
             val viewPagerAdapter = ViewPagerAdapter(requireActivity())
             viewPager.adapter = viewPagerAdapter
         }
+
     }
 
     fun goHome() {
-        // Reset order in view model
         sharedViewModel.resetVehicleData()
 
         findNavController().navigate(R.id.action_endFragment_to_startFragment)

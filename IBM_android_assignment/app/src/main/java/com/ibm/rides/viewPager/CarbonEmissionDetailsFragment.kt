@@ -31,7 +31,6 @@ class CarbonEmissionDetailsFragment : Fragment() {
         }
         sharedViewModel.selectedVehicle.observe(viewLifecycleOwner) { vehicle ->
             vehicle?.let {
-                binding?.co2EmissionsTextView?.text = vehicle.kilometrage.toString()
                 val carbonEmissions = sharedViewModel.getCarbonEmissionsForSelectedVehicle()
                 binding?.carbonEmissionsTextView?.text = carbonEmissions?.toString() ?: "N/A"
             }

@@ -1,7 +1,5 @@
 package com.ibm.rides.api
 
-//import com.ibm.rides.Vehicle
-import com.ibm.rides.model.Vehicle
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
