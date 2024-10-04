@@ -35,4 +35,6 @@
     <string name="no_emissions_data_available">No emissions data available.</string>
     <string name="carbon_emission_analysis">The current carbon emissions for the selected vehicle are %1$.2f g CO₂/km, indicating a %2$s emission level compared to average emissions for similar vehicles.</string>
     <string name="n_a">N/A</string>
+    <string name="vehicle_list">Vehicle List </string>
+
 </resources>

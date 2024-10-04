@@ -21,4 +21,8 @@ object NetworkUtils {
             return networkInfo != null && networkInfo.isConnected
         }
     }
+    fun isInputValid(input: Int?): Boolean {
+        val size = input
+        return size != null && size in 1..100
+    }
 }

@@ -3,6 +3,7 @@
 //import com.ibm.rides.repository.VehicleRepository // or IVehicleRepository if you create one
 import com.ibm.rides.data.model.domain.Vehicle
 import com.ibm.rides.data.repository.VehicleRepository
+import com.ibm.rides.utils.NetworkUtils
 import com.ibm.rides.viewmodel.VehicleViewModel
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.runBlocking
@@ -45,7 +46,7 @@ class MyViewModelTest {
         `when`(vehicleRepository.fetchVehicles(10)).thenReturn(Result.success(mockVehicles))
 
         // Call the method and verify the result
-        val result = vehicleViewModel.isInputValid(10) // Ensure this method exists and returns a boolean
+        val result = NetworkUtils.isInputValid(10) // Ensure this method exists and returns a boolean
         assertTrue(result)
     }
 }
