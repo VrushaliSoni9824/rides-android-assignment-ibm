@@ -30,4 +30,6 @@
     <string name="kilometrage">kilometrage</string>
     <string name="swipe_right_for_carbon_emission">Swipe right for carbon emission view.</string>
     <string name="no_internet">No internet connection</string>
+    <string name="go_to_detail">Go to Details</string>
+
 </resources>

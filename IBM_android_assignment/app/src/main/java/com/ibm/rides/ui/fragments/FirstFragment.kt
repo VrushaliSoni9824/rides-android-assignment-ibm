@@ -11,6 +11,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -19,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
@@ -133,50 +137,6 @@ class FirstFragment : Fragment() {
     }
 
     @Composable
-    fun VehicleListUI(
-        textInput: String,
-        onTextInputChange: (String) -> Unit,
-        onSearchClick: () -> Unit,
-        sortOption: SortOption,
-        onSortChange: (SortOption) -> Unit,
-        vehicleList: List<Vehicle>,
-        onVehicleClick: (Vehicle) -> Unit,
-        errorMessage: String? 
-    ) {
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            item {
-                SearchInputField(textInput, onTextInputChange)
-            }
-
-            item {
-                errorMessage?.let {
-                    Text(text = it, color = Color.Red)
-                }
-            }
-
-            item {
-                SearchButton(onSearchClick)
-            }
-
-            item {
-                SortOptionsRow(
-                    sortOption = sortOption,
-                    onSortChange = onSortChange
-                )
-            }
-
-            items(vehicleList) { vehicle ->
-                VehicleItem(vehicle = vehicle, onClick = { onVehicleClick(vehicle) })
-            }
-        }
-    }
-
-    @Composable
     fun ErrorUI(message: String, onRetry: () -> Unit) {
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -266,25 +226,83 @@ class FirstFragment : Fragment() {
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = "${stringResource(id = R.string.make_and_model)} ${vehicle.make_and_model}",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.primary
-                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "${stringResource(id = R.string.make_and_model)} ${vehicle.make_and_model}",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Icon(
+                        imageVector = Icons.Default.ArrowForward,
+                        contentDescription = "${stringResource(id = R.string.go_to_detail)}",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "${stringResource(id = R.string.vin)} ${vehicle.vin}",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f) 
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Divider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), thickness = 1.dp)
+                Divider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f),
+                    thickness = 1.dp
+                )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "${stringResource(id = R.string.car_type)} ${vehicle.car_type}",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.secondary
                 )
+            }
+        }
+    }
+
+    @Composable
+    fun VehicleListUI(
+        textInput: String,
+        onTextInputChange: (String) -> Unit,
+        onSearchClick: () -> Unit,
+        sortOption: SortOption,
+        onSortChange: (SortOption) -> Unit,
+        vehicleList: List<Vehicle>,
+        onVehicleClick: (Vehicle) -> Unit,
+        errorMessage: String?
+    ) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            item {
+                SearchInputField(value = textInput, onValueChange = onTextInputChange)
+            }
+
+            item {
+                errorMessage?.let {
+                    Text(text = it, color = Color.Red)
+                }
+            }
+
+            item {
+                SearchButton(onClick = onSearchClick)
+            }
+
+            item {
+                SortOptionsRow(
+                    sortOption = sortOption,
+                    onSortChange = onSortChange
+                )
+            }
+
+            items(vehicleList) { vehicle ->
+                VehicleItem(vehicle = vehicle, onClick = { onVehicleClick(vehicle) })
             }
         }
     }
