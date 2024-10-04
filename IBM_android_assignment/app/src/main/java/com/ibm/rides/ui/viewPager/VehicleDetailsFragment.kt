@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.ibm.rides.MainActivity
 import com.ibm.rides.databinding.FragmentVehicleDetailsBinding
 import com.ibm.rides.viewmodel.VehicleViewModel
 
@@ -35,6 +36,8 @@ class VehicleDetailsFragment : Fragment() {
 
         sharedViewModel.selectedVehicle.observe(viewLifecycleOwner) { vehicle ->
             vehicle?.let {
+                (activity as? MainActivity)?.setTitle(it.make_and_model) // Set the title based on the vehicle's make and model
+
                 binding?.vinTextView?.text = it.vin
                 binding?.makeModelTextView?.text = it.make_and_model
                 binding?.colorTextView?.text = it.color

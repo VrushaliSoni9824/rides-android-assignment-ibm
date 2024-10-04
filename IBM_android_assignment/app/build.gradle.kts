@@ -110,4 +110,5 @@ dependencies {
     testImplementation("org.mockito:mockito-core:4.5.1") // For mocking
     testImplementation("androidx.arch.core:core-testing:2.1.0")
 
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }

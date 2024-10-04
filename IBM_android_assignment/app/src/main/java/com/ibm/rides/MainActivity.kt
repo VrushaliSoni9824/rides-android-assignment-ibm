@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         constraintLayout = findViewById(R.id.c1)
 
+        supportActionBar?.title = getString(R.string.app_name)
+
         networkChangeReceiver = NetworkChangeReceiver(constraintLayout)
         registerReceiver(networkChangeReceiver, IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"))
     }
@@ -47,6 +49,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onPause() {
         super.onPause()
         unregisterReceiver(networkChangeReceiver)
+    }
+    fun setTitle(title: String) {
+        supportActionBar?.title = title
     }
 }
 
