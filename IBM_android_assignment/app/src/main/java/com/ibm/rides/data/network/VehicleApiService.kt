@@ -1,7 +1,7 @@
-package com.ibm.rides.api
+package com.ibm.rides.data.network
 
 //import com.ibm.rides.Vehicle
-import com.ibm.rides.model.Vehicle
+import com.ibm.rides.data.model.api.VehicleApiModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

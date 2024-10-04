@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.ibm.rides.VehicleViewModel" />
+            type="com.ibm.rides.viewmodel.VehicleViewModel" />
         <variable
             name="endFragment"
             type="com.ibm.rides.fragments.SecondFragment" />

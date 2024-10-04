@@ -5,13 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.lightColorScheme
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ibm.rides.R
-import com.ibm.rides.VehicleViewModel
+import com.ibm.rides.viewmodel.VehicleViewModel
 import com.ibm.rides.databinding.FragmentSecondBinding
 
 class SecondFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.ibm.rides.api
+package com.ibm.rides.data.model.api
 import com.google.gson.annotations.SerializedName
 
 data class VehicleApiModel(

@@ -1,14 +1,13 @@
-package com.ibm.rides
+package com.ibm.rides.viewmodel
 
-import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ibm.rides.model.Vehicle
-import com.ibm.rides.repository.VehicleRepository
-import com.ibm.rides.sealedClass.VehicleUIState
+import com.ibm.rides.data.model.domain.Vehicle
+import com.ibm.rides.data.repository.VehicleRepository
+import com.ibm.rides.ui.state.VehicleUIState
 import kotlinx.coroutines.launch
 
 class VehicleViewModel(private val vehicleRepository: VehicleRepository) : ViewModel() {

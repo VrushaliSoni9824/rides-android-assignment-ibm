@@ -2,7 +2,6 @@ package com.ibm.rides.fragments
 
 //import VehicleViewModel
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,11 +28,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ibm.rides.R
-import com.ibm.rides.VehicleViewModel
-//import com.ibm.rides.VehicleViewModel
-import com.ibm.rides.model.Vehicle
-import com.ibm.rides.repository.VehicleRepository
-import com.ibm.rides.sealedClass.VehicleUIState
+import com.ibm.rides.viewmodel.VehicleViewModel
+//import com.ibm.rides.viewmodel.VehicleViewModel
+import com.ibm.rides.data.model.domain.Vehicle
+import com.ibm.rides.data.repository.VehicleRepository
+import com.ibm.rides.ui.state.VehicleUIState
 
 enum class SortOption { VIN, CAR_TYPE }
 
