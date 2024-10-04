@@ -1,5 +1,6 @@
 package com.ibm.rides.model
 
+import com.ibm.rides.data.model.domain.Vehicle
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -82,6 +83,7 @@ class VehicleTest {
         // Assert
         assertEquals(5000.0, emissions, 0.001) // Expect 1 unit per km
     }
+    // Fail unit test
 //    @Test
 //    fun testCalculateCarbonEmissions_FailedTest() {
 //        // Arrange
