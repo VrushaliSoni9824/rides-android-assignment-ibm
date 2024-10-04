@@ -1,6 +1,6 @@
-package com.ibm.rides.sealedClass
+package com.ibm.rides.ui.state
 
-import com.ibm.rides.model.Vehicle
+import com.ibm.rides.data.model.domain.Vehicle
 
 sealed class VehicleUIState {
     object Loading : VehicleUIState()

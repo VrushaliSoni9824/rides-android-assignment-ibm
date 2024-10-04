@@ -1,5 +1,4 @@
-package com.ibm.rides.model
-
+package com.ibm.rides.data.model.domain
 import com.google.gson.annotations.SerializedName
 
 data class Vehicle(

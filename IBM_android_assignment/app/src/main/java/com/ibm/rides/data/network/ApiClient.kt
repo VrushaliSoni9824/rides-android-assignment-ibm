@@ -1,4 +1,4 @@
-package com.ibm.rides.api
+package com.ibm.rides.data.network
 
 import com.ibm.rides.BuildConfig
 import retrofit2.Retrofit
