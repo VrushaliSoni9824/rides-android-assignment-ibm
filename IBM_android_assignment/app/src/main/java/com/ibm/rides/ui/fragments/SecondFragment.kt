@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ibm.rides.R
+import com.ibm.rides.adapters.ViewPagerAdapter
 import com.ibm.rides.viewmodel.VehicleViewModel
 import com.ibm.rides.databinding.FragmentSecondBinding
-import com.ibm.rides.model.Vehicle
 
 class SecondFragment : Fragment() {
 

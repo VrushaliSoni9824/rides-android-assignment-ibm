@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.ibm.rides.VehicleViewModel
 import com.ibm.rides.databinding.FragmentCarbonEmmissionBinding
+import com.ibm.rides.viewmodel.VehicleViewModel
 
 class CarbonEmissionDetailsFragment : Fragment() {
 

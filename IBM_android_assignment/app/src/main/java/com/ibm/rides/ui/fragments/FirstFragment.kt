@@ -27,20 +27,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ibm.rides.R
-<<<<<<< HEAD
-import com.ibm.rides.VehicleViewModel
-//import com.ibm.rides.VehicleViewModel
-import com.ibm.rides.model.Vehicle
-import com.ibm.rides.repository.VehicleRepository
-import com.ibm.rides.sealedClass.VehicleUIState
-import com.ibm.rides.ui.theme.RidesTheme
-=======
 import com.ibm.rides.viewmodel.VehicleViewModel
 //import com.ibm.rides.viewmodel.VehicleViewModel
 import com.ibm.rides.data.model.domain.Vehicle
 import com.ibm.rides.data.repository.VehicleRepository
 import com.ibm.rides.ui.state.VehicleUIState
->>>>>>> feature/base_requirements
+import com.ibm.rides.ui.theme.RidesTheme
 
 enum class SortOption { VIN, CAR_TYPE }
 
