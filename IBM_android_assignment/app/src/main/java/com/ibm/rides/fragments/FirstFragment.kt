@@ -1,4 +1,4 @@
-package com.ibm.rides.ui.fragments
+package com.ibm.rides.fragments
 
 //import VehicleViewModel
 import android.os.Bundle
@@ -21,18 +21,18 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ibm.rides.R
-import com.ibm.rides.viewmodel.VehicleViewModel
-//import com.ibm.rides.viewmodel.VehicleViewModel
-import com.ibm.rides.data.model.domain.Vehicle
-import com.ibm.rides.data.repository.VehicleRepository
-import com.ibm.rides.ui.state.VehicleUIState
-import com.ibm.rides.ui.theme.RidesTheme
+import com.ibm.rides.VehicleViewModel
+//import com.ibm.rides.VehicleViewModel
+import com.ibm.rides.model.Vehicle
+import com.ibm.rides.repository.VehicleRepository
+import com.ibm.rides.sealedClass.VehicleUIState
 
 enum class SortOption { VIN, CAR_TYPE }
 
@@ -57,19 +57,21 @@ class FirstFragment : Fragment() {
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }
-    }
 
+    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        val vehicleRepository = VehicleRepository()
+//        vehicleViewModel = ViewModelProvider(this, VehicleViewModelFactory(vehicleRepository)).get(VehicleViewModel::class.java)
+//
+//
+//    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<ComposeView>(R.id.compose_view).setContent {
-//            MaterialTheme(
-//                colorScheme = lightColorScheme(), // Set light color scheme
-//            ) {
-//                Surface(color = MaterialTheme.colorScheme.background) {
-//                    FirstScreen()
-//                }
-//            }
-            RidesTheme {  // Use your custom RidesTheme here
+            MaterialTheme(
+                colorScheme = lightColorScheme(), // Set light color scheme
+            ) {
                 Surface(color = MaterialTheme.colorScheme.background) {
                     FirstScreen()
                 }
@@ -81,7 +83,7 @@ class FirstFragment : Fragment() {
     fun FirstScreen() {
         var textInput by remember { mutableStateOf("") }
         var sortOption by remember { mutableStateOf(SortOption.VIN) }
-        var errorMessage by remember { mutableStateOf<String?>(null) } // State for error message
+        var errorMessage by remember { mutableStateOf<String?>(null) } 
 
         // Observe the Vehicle UI State
         val vehicleUIState by sharedViewModel.uiState.observeAsState(VehicleUIState.Loading)
@@ -99,8 +101,7 @@ class FirstFragment : Fragment() {
                     },
                     onSearchClick = {
                         val size = textInput.toIntOrNull()
-                        if (sharedViewModel.isInputValid(size)) {
-                            val size = textInput.toInt()
+                        if (size != null && size in 1..100) {
                             sharedViewModel.fetchVehiclesFromApi(size)
                         } else {
                             errorMessage = "Please enter a number between 1 and 100."
@@ -210,9 +211,9 @@ class FirstFragment : Fragment() {
     fun SearchButton(onClick: () -> Unit) {
         Button(
             onClick = onClick,
-//            colors = ButtonDefaults.buttonColors(
-//                containerColor = Color(ContextCompat.getColor(requireContext(), R.color.dark_grey))
-//            ),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(ContextCompat.getColor(requireContext(), R.color.dark_grey))
+            ),
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(stringResource(id = R.string.Search))
@@ -244,15 +245,14 @@ class FirstFragment : Fragment() {
             onClick = onClick,
             colors = ButtonDefaults.buttonColors(
                 containerColor = if (selected)
-                    MaterialTheme.colorScheme.primary // Use the primary color from the theme when selected
-                else MaterialTheme.colorScheme.surface, // Use the surface color from the theme when not selected
+                    Color(ContextCompat.getColor(requireContext(), R.color.dark_grey))
+                else Color.White,
                 contentColor = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
             )
         ) {
             Text(label)
         }
     }
-
 
     @Composable
     fun VehicleItem(vehicle: Vehicle, onClick: () -> Unit) {

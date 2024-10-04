@@ -1,4 +1,4 @@
-package com.ibm.rides.fragments
+package com.ibm.rides.ui.fragments
 
 import android.os.Bundle
 import android.util.Log

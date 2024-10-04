@@ -6,7 +6,7 @@
         app:startDestination="@id/startFragment">
         <fragment
             android:id="@+id/startFragment"
-            android:name="com.ibm.rides.fragments.FirstFragment"
+            android:name="com.ibm.rides.ui.fragments.FirstFragment"
             android:label="@string/app_name"
             tools:layout="@layout/fragment_first">
             <action
@@ -15,7 +15,7 @@
         </fragment>
         <fragment
             android:id="@+id/endFragment"
-            android:name="com.ibm.rides.fragments.SecondFragment"
+            android:name="com.ibm.rides.ui.fragments.SecondFragment"
             android:label="@string/vehicle_detail"
             tools:layout="@layout/fragment_second">
             <action

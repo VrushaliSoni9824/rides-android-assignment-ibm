@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
-    tools:context=".fragments.SecondFragment">
+    tools:context=".ui.fragments.SecondFragment">
 
     <data>
         <variable
@@ -10,7 +10,7 @@
             type="com.ibm.rides.viewmodel.VehicleViewModel" />
         <variable
             name="endFragment"
-            type="com.ibm.rides.fragments.SecondFragment" />
+            type="com.ibm.rides.ui.fragments.SecondFragment" />
     </data>
 
     <androidx.viewpager2.widget.ViewPager2

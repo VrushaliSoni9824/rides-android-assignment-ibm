@@ -1,4 +1,4 @@
-package com.ibm.rides.viewPager
+package com.ibm.rides.ui.viewPager
 
 import android.os.Bundle
 import android.view.LayoutInflater

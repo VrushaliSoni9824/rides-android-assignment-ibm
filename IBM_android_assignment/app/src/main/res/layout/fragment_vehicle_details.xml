@@ -2,12 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
-    tools:context=".viewPager.VehicleDetailsFragment">
+    tools:context=".ui.viewPager.VehicleDetailsFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="com.ibm.rides.VehicleViewModel" />
+            type="com.ibm.rides.viewmodel.VehicleViewModel" />
     </data>
 
     <ScrollView

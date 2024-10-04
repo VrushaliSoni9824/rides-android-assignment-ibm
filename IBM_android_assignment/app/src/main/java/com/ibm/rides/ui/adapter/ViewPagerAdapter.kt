@@ -3,8 +3,8 @@ package com.ibm.rides.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.ibm.rides.viewPager.CarbonEmissionDetailsFragment
-import com.ibm.rides.viewPager.VehicleDetailsFragment
+import com.ibm.rides.ui.viewPager.CarbonEmissionDetailsFragment
+import com.ibm.rides.ui.viewPager.VehicleDetailsFragment
 
 class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
