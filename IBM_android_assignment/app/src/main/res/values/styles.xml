@@ -27,4 +27,14 @@
     <style name="Widget.Theme1.Divider" parent="">
         <item name="android:background">?attr/dividerHorizontal</item>
     </style>
+
+    <style name="RidesTheme">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <!-- Add more items as needed -->
+    </style>
+
 </resources>

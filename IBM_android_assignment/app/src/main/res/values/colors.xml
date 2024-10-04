@@ -12,4 +12,19 @@
     <color name="pink_950">#FFB31650</color>
     <color name="purple_400">#FFAB47BC</color>
     <color name="dark_grey">#212121</color>
+
+    <color name="colorPrimary">#FF625B71</color>
+    <color name="colorOnPrimary">#FF625B71</color>
+    <color name="colorSecondary">#FF625B71</color>
+    <color name="colorOnSecondary">#FF625B71</color>
+
+    <color name="purple_80">#FF625B71</color>
+    <color name="purple_grey_80">#FFCCC2DC</color>
+    <color name="pink_80">#FFEFB8C8</color>
+
+    <!-- Dark Color Palette -->
+    <color name="purple_40">#FF212121</color>
+    <color name="purple_grey_40">#FF625B71</color>
+    <color name="pink_40">#FF7D5260</color>
+
 </resources>

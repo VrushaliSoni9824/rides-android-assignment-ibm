@@ -100,4 +100,15 @@ dependencies {
     implementation(libs.androidx.ui.android)
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation(libs.androidx.runtime.livedata)
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
+
+    // Unit Testing Libraries
+    testImplementation("junit:junit:4.13.2")
+//    testImplementation("androidx.arch.core:core-testing:2.1.0")  // For LiveData testing
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4") // For coroutines testing
+
+    testImplementation("org.mockito:mockito-core:4.5.1") // For mocking
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }

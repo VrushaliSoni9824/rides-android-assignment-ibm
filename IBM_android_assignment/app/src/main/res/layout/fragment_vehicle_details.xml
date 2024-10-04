@@ -1,0 +1,190 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    tools:context=".ui.viewPager.VehicleDetailsFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ibm.rides.viewmodel.VehicleViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/side_margin">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/RidesTheme"
+            android:padding="@dimen/side_margin">
+
+            <TextView
+                android:id="@+id/section_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vehicle_detail"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/purple_40"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/section_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="@color/purple_grey_80">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- VIN Section -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/vin"
+                            android:textStyle="bold"
+                            android:textColor="@color/purple_40"
+                            android:layout_marginEnd="8dp"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/vin_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.selectedVehicle.vin}"
+                            android:textColor="@color/dark_grey"
+                            android:drawablePadding="8dp" />
+                    </LinearLayout>
+
+                    <!-- Make and Model Section -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/make_and_model"
+                            android:textStyle="bold"
+                            android:textColor="@color/purple_40"
+                            android:layout_marginEnd="8dp"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/make_model_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/dark_grey"
+                            android:text="@{viewModel.selectedVehicle.make_and_model}"
+                            android:drawablePadding="8dp" />
+                    </LinearLayout>
+
+                    <!-- Color Section -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/color_label"
+                            android:textStyle="bold"
+                            android:textColor="@color/purple_40"
+                            android:layout_marginEnd="8dp"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/color_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.selectedVehicle.color}"
+                            android:textColor="@color/dark_grey"
+                            android:drawablePadding="8dp" />
+                    </LinearLayout>
+
+                    <!-- Car Type Section -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/car_type"
+                            android:textStyle="bold"
+                            android:textColor="@color/purple_40"
+                            android:layout_marginEnd="8dp"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/car_type_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/dark_grey"
+                            android:text="@{viewModel.selectedVehicle.car_type}"
+                            android:drawablePadding="8dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Swipe Direction Section -->
+            <TextView
+                android:id="@+id/swipe_direction_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/swipe_right_for_carbon_emission"
+                android:textColor="@color/purple_40"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/card_view_id"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center" />
+
+            <ImageView
+                android:id="@+id/arrow_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_arrow_right"
+                app:layout_constraintTop_toBottomOf="@id/swipe_direction_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
