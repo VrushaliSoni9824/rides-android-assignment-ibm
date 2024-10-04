@@ -29,6 +29,16 @@ Rides is a Kotlin-based Android app that retrieves and displays a list of vehicl
 - Carbon emissions estimation based on vehicle mileage.
 - Unit tests for input validation and carbon emissions logic.
 
+### Additional Requirements
+The code for the following features can be found in the `feature/additional_requirement` branch:
+1. Composable view separation
+2. Light/Dark theme
+3. Broadcast receiver for internet connectivity
+4. Orientation-related changes
+5. Unit tests
+6. Validations
+7. Graph for carbon emissions
+   
 ## Technologies Used
 
 - **Kotlin**: Language for Android development.
@@ -60,3 +70,17 @@ To run this project locally, follow these steps:
 1. Clone the repository:
    ```bash
    git clone https://github.com/VrushaliSoni9824/rides-android-assignment-ibm
+## Video Demo
+
+You can watch the demo of the Rides app by clicking the link below:
+
+https://github.com/user-attachments/assets/38181ddd-b0f5-40c6-b391-4db66fbe853d
+
+## Unit cases
+
+1. Carbon emission
+![Screenshot 2024-10-04 165114](https://github.com/user-attachments/assets/a4170d92-46d7-4767-8154-fab5863c304b)
+![Screenshot 2024-10-04 165319](https://github.com/user-attachments/assets/e6c599ab-4293-4a80-8efe-159faf7c202a)
+
+2. Validation
+![Screenshot 2024-10-04 165409](https://github.com/user-attachments/assets/3a93b6a9-9e5a-4354-9468-8a2b0f68c24b)
